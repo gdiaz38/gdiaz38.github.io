@@ -11,6 +11,8 @@
 			.contact-icon {
 				transition: all 0.3s ease;
 				display: inline-block;
+				border: none !important;
+				outline: none !important;
 			}
 			
 			.contact-icon:hover {
@@ -18,9 +20,16 @@
 				transform: scale(1.1);
 			}
 			
+			.contact-icon:focus {
+				outline: none !important;
+				border: none !important;
+			}
+			
 			.contact-icon i {
 				vertical-align: top;
 				line-height: 1;
+				border: none !important;
+				outline: none !important;
 			}
 			
 			.contact-list {
@@ -35,6 +44,35 @@
 			.contact-list li {
 				display: flex;
 				align-items: center;
+				height: 4rem;
+			}
+			
+			.contact-list .contact-icon {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				height: 4rem;
+				width: 4rem;
+			}
+			
+			.contact-list .contact-icon i {
+				margin: 0 !important;
+				padding: 0 !important;
+				vertical-align: middle;
+			}
+			
+			.contact-list .contact-icon i.fa-envelope {
+				font-size: 4rem !important;
+				position: relative;
+				top: 1.2rem;
+			}
+			
+			.contact-list .contact-icon i.fa-phone {
+				font-size: 4rem !important;
+			}
+			
+			.contact-list .contact-icon i.fa-linkedin {
+				font-size: 4rem !important;
 			}
 			
 			.fade-link {
@@ -69,7 +107,7 @@
 			<section id="about" class="wrapper style1 fullscreen fade-up">
 				<div class="inner">
 					<h1>Gabriel Diaz</h1>
-					<p>First-generation engineer passionate about data science, AI, and technology that drives impact. Currently a Reliability & Maintenance Engineering Intern at Gallo and incoming Master's student in Data Science at UC Riverside.</p>
+					<p>First-generation professional in engineering passionate about data science, AI, and technology that drives impact. Currently a Reliability & Maintenance Engineering Intern at Gallo and incoming Master's student in Data Science at UC Riverside.</p>
 					
 					<!-- Featured Content -->
 					<div style="margin: 2em 0;">
