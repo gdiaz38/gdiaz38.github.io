@@ -1,280 +1,485 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<title>Gabriel Diaz - Portfolio</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-		<style>
-			.contact-icon {
-				transition: all 0.3s ease;
-				display: inline-block;
-				border: none !important;
-				outline: none !important;
-			}
-			
-			.contact-icon:hover {
-				opacity: 0.7;
-				transform: scale(1.1);
-			}
-			
-			.contact-icon:focus {
-				outline: none !important;
-				border: none !important;
-			}
-			
-			.contact-icon i {
-				vertical-align: top;
-				line-height: 1;
-				border: none !important;
-				outline: none !important;
-			}
-			
-			.contact-list {
-				display: flex;
-				justify-content: flex-start;
-				align-items: center !important;
-				gap: 2rem;
-				list-style: none;
-				padding: 0;
-			}
-			
-			.contact-list li {
-				display: flex;
-				align-items: center;
-				height: 4rem;
-			}
-			
-			.contact-list .contact-icon {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				height: 4rem;
-				width: 4rem;
-			}
-			
-			.contact-list .contact-icon i {
-				margin: 0 !important;
-				padding: 0 !important;
-				vertical-align: middle;
-			}
-			
-			.contact-list .contact-icon i.fa-envelope {
-				font-size: 4rem !important;
-				position: relative;
-				top: 1.2rem;
-			}
-			
-			.contact-list .contact-icon i.fa-phone {
-				font-size: 4rem !important;
-			}
-			
-			.contact-list .contact-icon i.fa-linkedin {
-				font-size: 4rem !important;
-			}
-			
-			.fade-link {
-				transition: opacity 0.3s ease;
-			}
-			
-			.fade-link:hover {
-				opacity: 0.7;
-			}
-		</style>
-	</head>
-	<body class="is-preload">
+<head>
+    <title>Gabriel Diaz - Portfolio</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <style>
+        .contact-icon {
+            transition: all 0.3s ease;
+            display: inline-block;
+            border: none !important;
+            outline: none !important;
+        }
+        .contact-icon:hover {
+            opacity: 0.7;
+            transform: scale(1.1);
+        }
+        .contact-icon:focus {
+            outline: none !important;
+            border: none !important;
+        }
+        .contact-icon i {
+            vertical-align: top;
+            line-height: 1;
+            border: none !important;
+            outline: none !important;
+        }
+        .contact-list {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center !important;
+            gap: 2rem;
+            list-style: none;
+            padding: 0;
+        }
+        .contact-list li {
+            display: flex;
+            align-items: center;
+            height: 4rem;
+        }
+        .contact-list .contact-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 4rem;
+            width: 4rem;
+        }
+        .contact-list .contact-icon i {
+            margin: 0 !important;
+            padding: 0 !important;
+            vertical-align: middle;
+        }
+        .contact-list .contact-icon i.fa-envelope {
+            font-size: 4rem !important;
+            position: relative;
+            top: 1.2rem;
+        }
+        .contact-list .contact-icon i.fa-phone {
+            font-size: 4rem !important;
+        }
+        .contact-list .contact-icon i.fa-linkedin {
+            font-size: 4rem !important;
+        }
+        .fade-link {
+            transition: opacity 0.3s ease;
+        }
+        .fade-link:hover {
+            opacity: 0.7;
+        }
 
-		<!-- Sidebar -->
-		<section id="sidebar">
-			<div class="inner">
-				<nav>
-					<ul>
-						<li><a href="#about">About</a></li>
-						<li><a href="#experience">Experience</a></li>
-						<li><a href="#education">Education</a></li>
-						<li><a href="#contact">Contact</a></li>
-					</ul>
-				</nav>
-			</div>
-		</section>
+        /* New styles for enhanced about section */
+        .about-layout {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: start;
+            margin: 2rem 0;
+        }
 
-		<!-- Wrapper -->
-		<div id="wrapper">
+        .headshot-container {
+            text-align: center;
+        }
 
-			<!-- About (with contact) -->
-			<section id="about" class="wrapper style1 fullscreen fade-up">
-				<div class="inner">
-					<h1>Gabriel Diaz</h1>
-					<p>First-generation professional in engineering passionate about data science, AI, and technology that drives impact. Currently a Reliability & Maintenance Engineering Intern at Gallo and incoming Master's student in Data Science at UC Riverside.</p>
-					
-					<!-- Featured Content -->
-					<div style="margin: 2em 0;">
-						<h3>Featured Content</h3>
-						<p>I've been featured in educational content and podcasts discussing my journey in engineering and data science:</p>
-						<ul class="actions">
-							<li><a href="https://m.youtube.com/watch?v=PI-FmXIyW00" target="_blank" class="button small">Watch Video</a></li>
-							<li><a href="https://podbay.fm/p/divergent-college-vibes-podcast-673899/e/1695609525" target="_blank" class="button small">Listen to Podcast</a></li>
-						</ul>
-					</div>
-					
-					<!-- Contact Info in About Section -->
-					<div class="split style1" style="margin-top: 2em;">
-						<section>
-							<h3>Contact Information</h3>
-							<ul class="contact contact-list">
-								<li>
-									<a href="mailto:gabrield0907@gmail.com" class="contact-icon" style="text-decoration: none; color: inherit;">
-										<i class="fas fa-envelope" style="font-size: 4rem; display: block;"></i>
-									</a>
-								</li>
-								<li>
-									<a href="tel:+17149008357" class="contact-icon" style="text-decoration: none; color: inherit;">
-										<i class="fas fa-phone" style="font-size: 4rem; display: block;"></i>
-									</a>
-								</li>
-								<li>
-									<a href="https://www.linkedin.com/in/gabriel-diaz0907" target="_blank" class="contact-icon" style="text-decoration: none; color: inherit;">
-										<i class="fab fa-linkedin" style="font-size: 4rem; display: block;"></i>
-									</a>
-								</li>
-							</ul>
-						</section>
-					</div>
+        .headshot-placeholder {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            margin: 0 auto 2rem auto;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
 
-					<ul class="actions">
-						<li><a href="#experience" class="button scrolly">Learn more</a></li>
-					</ul>
-				</div>
-			</section>
+        .headshot-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 2rem auto;
+            display: block;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
 
-			<!-- Experience -->
-			<section id="experience" class="wrapper style3 fade-up">
-				<div class="inner">
-					<h2>Experience</h2>
-					
-					<div style="max-width: 800px; margin: 0 auto;">
-						<section style="margin-bottom: 3em; text-align: left;">
-							<span class="icon solid major fa-industry"></span>
-							<h3><a href="https://www.gallo.com/" target="_blank" class="fade-link" style="color: inherit; text-decoration: none;">Gallo – Reliability & Maintenance Engineering Intern</a></h3>
-							<p><i>July 2025 – Present | Modesto, CA</i><br>
-							Collaborate with cross-functional teams to analyze bottling and harvest site equipment performance. Develop and document standard operating procedures (SOPs), time studies, and equipment capability assessments to improve training effectiveness and operational efficiency.</p>
-							<p><strong>Skills:</strong> AutoCAD, MS Office, SAP, Data Analysis</p>
-						</section>
+        .personal-info {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: none; /* Hidden since we moved info to main paragraph */
+        }
 
-						<section style="margin-bottom: 3em; text-align: left;">
-							<span class="icon solid major fa-flask"></span>
-							<h3><a href="https://www.mocalab.org" target="_blank" class="fade-link" style="color: inherit; text-decoration: none;">UC Merced School of Engineering – Student Research Assistant</a></h3>
-							<p><i>Sept 2024 – June 2025 | Merced, CA</i><br>
-							Developed privacy-conscious AI models by implementing secure machine learning protocols in Python. Spearheaded GPU programming projects, optimizing training times for large-scale models by 25%. Contributed to cutting-edge innovations in privacy-preserving AI under a CAHSI-Google-funded initiative.</p>
-							<p><strong>Skills:</strong> Python, Google Cloud Platform (GCP), Google Colab, Hugging Face Transformers, Unsloth, GitHub</p>
-						</section>
+        .personal-info h4 {
+            color: #fff;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
 
-						<section style="margin-bottom: 3em; text-align: left;">
-							<span class="icon solid major fa-microscope"></span>
-							<h3><a href="https://www.languagelearningandteachinglab.org" target="_blank" class="fade-link" style="color: inherit; text-decoration: none;">UC Merced School of Social Sciences – Student Research Assistant</a></h3>
-							<p><i>Mar 2023 – Sept 2024 | Merced, CA</i><br>
-							Automated recording and cataloging workflows, boosting data analysis efficiency by 20%. Generated comprehensive research documentation, enabling improved experimental reproducibility. Managed robotic recording equipment and ensured data accuracy.</p>
-							<p><strong>Skills:</strong> Python, Observer XT, Arduino, Data Analysis, GitHub</p>
-						</section>
+        .personal-info ul {
+            list-style: none;
+            padding: 0;
+        }
 
-						<section style="margin-bottom: 3em; text-align: left;">
-							<span class="icon solid major fa-building"></span>
-							<h3><a href="https://www.tranetechnologies.com/en/index.html" target="_blank" class="fade-link" style="color: inherit; text-decoration: none;">Trane Technologies – Technical Sales Engineering Intern</a></h3>
-							<p><i>May 2024 – Aug 2024 | Brea, CA</i><br>
-							Acquired expertise in building automation systems and controls through hands-on project experience. Collaborated with sales engineers to implement HVAC solutions, enhancing commercial systems knowledge.</p>
-							<p><strong>Skills:</strong> AutoCAD, MS Office, Technical Sales, HVAC Systems</p>
-						</section>
+        .personal-info li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
 
-						<section style="margin-bottom: 3em; text-align: left;">
-							<span class="icon solid major fa-shield-alt"></span>
-							<h3><a href="https://www.medtronic.com/en-us/index.html" target="_blank" class="fade-link" style="color: inherit; text-decoration: none;">Medtronic – Product Security Engineering Intern</a></h3>
-							<p><i>June 2023 – Aug 2023 | Mounds View, MN</i><br>
-							Optimized Python scripts for software bill of materials (SBOM) generation, reducing processing time by 30%. Conducted risk assessments for software-enabled medical devices, identifying key candidates for SBOM development.</p>
-							<p><strong>Skills:</strong> Python, Cybersecurity, Risk Assessment, Software Development, GitHub</p>
-						</section>
-					</div>
-				</div>
-			</section>
+        .personal-info li::before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+        }
 
-			<!-- Education (with links) -->
-			<section id="education" class="wrapper style2 fade-up">
-				<div class="inner">
-					<h2>Education</h2>
-					<div class="features">
-						<section>
-							<span class="icon solid major fa-graduation-cap"></span>
-							<h3><a href="https://engineeringonline.ucr.edu/data-science/" target="_blank" class="fade-link" style="color: inherit; text-decoration: none;">University of California, Riverside</a></h3>
-							<p><strong>Master of Science in Engineering, Data Science</strong><br/>
-							Expected June 2027</p>
-						</section>
-						<section>
-							<span class="icon solid major fa-university"></span>
-							<h3><a href="https://www.ucmerced.edu/majors-and-minors/computer-science-engineering-bs" target="_blank" class="fade-link" style="color: inherit; text-decoration: none;">University of California, Merced</a></h3>
-							<p><strong>Bachelor of Science in Computer Science and Engineering</strong><br/>
-							GPA: 3.63 | Graduated May 2025<br/>
-							<strong>Honors & Awards:</strong> Lawrence Livermore National Laboratory Computing Scholarship, Tapia Conference Scholarship, Frances M. Benton Scholarship, Hispanic Scholarship Fund Scholar 2x, Dean's List 5x, Chancellor's List</p>
-						</section>
-					</div>
-				</div>
-			</section>
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            margin: 2rem 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
 
-			<!-- Contact (view resume) -->
-			<section id="contact" class="wrapper style1 fade-up">
-				<div class="inner">
-					<h2>Get in Touch</h2>
-					<p>I'm always open to discussing new opportunities, collaborations, or simply connecting with fellow engineers and data scientists. Feel free to reach out!</p>
-					
-					<div style="display: flex; flex-direction: column; gap: 3rem;">
-						<!-- Large Contact Icons -->
-						<div style="text-align: left;">
-							<h3>Contact Me</h3>
-							<div style="display: flex; flex-direction: column; gap: 1.5rem; margin-top: 1rem;">
-								<a href="mailto:gabrield0907@gmail.com" class="contact-icon" style="text-decoration: none; color: inherit;">
-									<i class="fas fa-envelope" style="font-size: 4rem;"></i>
-								</a>
-								<a href="tel:+17149008357" class="contact-icon" style="text-decoration: none; color: inherit;">
-									<i class="fas fa-phone" style="font-size: 4rem;"></i>
-								</a>
-								<a href="https://www.linkedin.com/in/gabriel-diaz0907" target="_blank" class="contact-icon" style="text-decoration: none; color: inherit;">
-									<i class="fab fa-linkedin" style="font-size: 4rem;"></i>
-								</a>
-							</div>
-						</div>
-						
-						<!-- Resume Section -->
-						<div>
-							<h3>View Resume</h3>
-							<p>Download my full resume for a comprehensive overview of my experience, skills, and achievements.</p>
-							<ul class="actions">
-								<li><a href="assets/resume/Gabriel_Diaz_Resume.pdf" class="button primary" download>Download Resume (PDF)</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</section>
+        .slide {
+            display: none;
+            position: relative;
+        }
 
-		</div>
+        .slide.active {
+            display: block;
+        }
 
-		<!-- Footer -->
-		<footer id="footer" class="wrapper style1-alt">
-			<div class="inner">
-				<ul class="menu">
-					<li>&copy; Gabriel Diaz. All rights reserved.</li>
-					<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-				</ul>
-			</div>
-		</footer>
+        .slide img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
 
-		<!-- Scripts -->
-		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/jquery.scrollex.min.js"></script>
-		<script src="assets/js/jquery.scrolly.min.js"></script>
-		<script src="assets/js/browser.min.js"></script>
-		<script src="assets/js/breakpoints.min.js"></script>
-		<script src="assets/js/util.js"></script>
-		<script src="assets/js/main.js"></script>
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -30px;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            user-select: none;
+            transition: all 0.3s ease;
+        }
 
-	</body>
+        .next {
+            right: 0;
+        }
+
+        .prev:hover, .next:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .dots-container {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 5px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active, .dot:hover {
+            background-color: #667eea;
+        }
+
+        @media (max-width: 768px) {
+            .about-layout {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .headshot-placeholder, .headshot-image {
+                width: 250px;
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body class="is-preload">
+    <!-- Sidebar -->
+    <section id="sidebar">
+        <div class="inner">
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+        <!-- About (enhanced with headshot and personal info) -->
+        <section id="about" class="wrapper style1 fullscreen fade-up">
+            <div class="inner">
+                <h1>Gabriel Diaz</h1>
+                <p>First-generation professional in engineering passionate about data science, AI, and technology that drives impact. With parents from Mexico City and raised in Orange County, CA, I bring diverse perspectives to my work. Currently a Reliability & Maintenance Engineering Intern at Gallo and incoming Master's student in Data Science at UC Riverside. When I'm not coding or working on engineering projects, you'll find me at the gym, playing soccer (huge FC Barcelona fan!), or catching the latest Marvel movie.</p>
+                
+                <div class="about-layout">
+                    <div class="headshot-container">
+                        <img src="images/headshot.jpg" alt="Gabriel Diaz" class="headshot-image">
+                    </div>
+
+                    <div>
+                        <!-- Simple Image Slideshow -->
+                        <div class="slideshow-container">
+                            <div class="slide active">
+                                <img src="images/slide1.jpg" alt="Photo 1">
+                            </div>
+                            <div class="slide">
+                                <img src="images/slide2.jpg" alt="Photo 2">
+                            </div>
+                            <div class="slide">
+                                <img src="images/slide3.jpeg" alt="Photo 3">
+                            </div>
+                            <div class="slide">
+                                <img src="images/slide4.jpg" alt="Photo 4">
+                            </div>
+
+                            <!-- Navigation arrows -->
+                            <button class="prev" onclick="changeSlide(-1)">❮</button>
+                            <button class="next" onclick="changeSlide(1)">❯</button>
+                        </div>
+                        
+                        <!-- Dots indicator -->
+                        <div class="dots-container">
+                            <span class="dot active" onclick="currentSlide(1)"></span>
+                            <span class="dot" onclick="currentSlide(2)"></span>
+                            <span class="dot" onclick="currentSlide(3)"></span>
+                            <span class="dot" onclick="currentSlide(4)"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Featured Content -->
+                <div style="margin: 2em 0;">
+                    <h3>Featured Content</h3>
+                    <p>I've been featured in educational content and podcasts discussing my journey in engineering and data science:</p>
+                    <ul class="actions">
+                        <li><a href="https://m.youtube.com/watch?v=PI-FmXIyW00" target="_blank" class="button small">Watch Video</a></li>
+                        <li><a href="https://podbay.fm/p/divergent-college-vibes-podcast-673899/e/1695609525" target="_blank" class="button small">Listen to Podcast</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info in About Section -->
+                <div class="split style1" style="margin-top: 2em;">
+                    <section>
+                        <h3>Contact Information</h3>
+                        <ul class="contact contact-list">
+                            <li>
+                                <a href="mailto:gabrield0907@gmail.com" class="contact-icon" style="text-decoration: none; color: inherit;">
+                                    <i class="fas fa-envelope" style="font-size: 4rem; display: block;"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="tel:+17149008357" class="contact-icon" style="text-decoration: none; color: inherit;">
+                                    <i class="fas fa-phone" style="font-size: 4rem; display: block;"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/in/gabriel-diaz0907" target="_blank" class="contact-icon" style="text-decoration: none; color: inherit;">
+                                    <i class="fab fa-linkedin" style="font-size: 4rem; display: block;"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </section>
+                </div>
+                <ul class="actions">
+                    <li><a href="#experience" class="button scrolly">Learn more</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section id="experience" class="wrapper style3 fade-up">
+            <div class="inner">
+                <h2>Experience</h2>
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <section style="margin-bottom: 3em; text-align: left;">
+                        <span class="icon solid major fa-industry"></span>
+                        <h3><a href="https://www.gallo.com/" target="_blank" class="fade-link" style="color: inherit; text-decoration: none;">Gallo – Reliability & Maintenance Engineering Intern</a></h3>
+                        <p><i>July 2025 – Present | Modesto, CA</i><br>
+                        Collaborate with cross-functional teams to analyze bottling and harvest site equipment performance. Develop and document standard operating procedures (SOPs), time studies, and equipment capability assessments to improve training effectiveness and operational efficiency.</p>
+                        <p><strong>Skills:</strong> AutoCAD, MS Office, SAP, Data Analysis</p>
+                    </section>
+
+                    <section style="margin-bottom: 3em; text-align: left;">
+                        <span class="icon solid major fa-flask"></span>
+                        <h3><a href="https://www.mocalab.org" target="_blank" class="fade-link" style="color: inherit; text-decoration: none;">UC Merced School of Engineering – Student Research Assistant</a></h3>
+                        <p><i>Sept 2024 – June 2025 | Merced, CA</i><br>
+                        Developed privacy-conscious AI models by implementing secure machine learning protocols in Python. Spearheaded GPU programming projects, optimizing training times for large-scale models by 25%. Contributed to cutting-edge innovations in privacy-preserving AI under a CAHSI-Google-funded initiative.</p>
+                        <p><strong>Skills:</strong> Python, Google Cloud Platform (GCP), Google Colab, Hugging Face Transformers, Unsloth, GitHub</p>
+                    </section>
+
+                    <section style="margin-bottom: 3em; text-align: left;">
+                        <span class="icon solid major fa-microscope"></span>
+                        <h3><a href="https://www.languagelearningandteachinglab.org" target="_blank" class="fade-link" style="color: inherit; text-decoration: none;">UC Merced School of Social Sciences – Student Research Assistant</a></h3>
+                        <p><i>Mar 2023 – Sept 2024 | Merced, CA</i><br>
+                        Automated recording and cataloging workflows, boosting data analysis efficiency by 20%. Generated comprehensive research documentation, enabling improved experimental reproducibility. Managed robotic recording equipment and ensured data accuracy.</p>
+                        <p><strong>Skills:</strong> Python, Observer XT, Arduino, Data Analysis, GitHub</p>
+                    </section>
+
+                    <section style="margin-bottom: 3em; text-align: left;">
+                        <span class="icon solid major fa-building"></span>
+                        <h3><a href="https://www.tranetechnologies.com/en/index.html" target="_blank" class="fade-link" style="color: inherit; text-decoration: none;">Trane Technologies – Technical Sales Engineering Intern</a></h3>
+                        <p><i>May 2024 – Aug 2024 | Brea, CA</i><br>
+                        Acquired expertise in building automation systems and controls through hands-on project experience. Collaborated with sales engineers to implement HVAC solutions, enhancing commercial systems knowledge.</p>
+                        <p><strong>Skills:</strong> AutoCAD, MS Office, Technical Sales, HVAC Systems</p>
+                    </section>
+
+                    <section style="margin-bottom: 3em; text-align: left;">
+                        <span class="icon solid major fa-shield-alt"></span>
+                        <h3><a href="https://www.medtronic.com/en-us/index.html" target="_blank" class="fade-link" style="color: inherit; text-decoration: none;">Medtronic – Product Security Engineering Intern</a></h3>
+                        <p><i>June 2023 – Aug 2023 | Mounds View, MN</i><br>
+                        Optimized Python scripts for software bill of materials (SBOM) generation, reducing processing time by 30%. Conducted risk assessments for software-enabled medical devices, identifying key candidates for SBOM development.</p>
+                        <p><strong>Skills:</strong> Python, Cybersecurity, Risk Assessment, Software Development, GitHub</p>
+                    </section>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education (with links) -->
+        <section id="education" class="wrapper style2 fade-up">
+            <div class="inner">
+                <h2>Education</h2>
+                <div class="features">
+                    <section>
+                        <span class="icon solid major fa-graduation-cap"></span>
+                        <h3><a href="https://engineeringonline.ucr.edu/data-science/" target="_blank" class="fade-link" style="color: inherit; text-decoration: none;">University of California, Riverside</a></h3>
+                        <p><strong>Master of Science in Engineering, Data Science</strong><br/>
+                        Expected June 2027</p>
+                    </section>
+                    <section>
+                        <span class="icon solid major fa-university"></span>
+                        <h3><a href="https://www.ucmerced.edu/majors-and-minors/computer-science-engineering-bs" target="_blank" class="fade-link" style="color: inherit; text-decoration: none;">University of California, Merced</a></h3>
+                        <p><strong>Bachelor of Science in Computer Science and Engineering</strong><br/>
+                        GPA: 3.63 | Graduated May 2025<br/>
+                        <strong>Honors & Awards:</strong> Lawrence Livermore National Laboratory Computing Scholarship, Tapia Conference Scholarship, Frances M. Benton Scholarship, Hispanic Scholarship Fund Scholar 2x, Dean's List 5x, Chancellor's List</p>
+                    </section>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact (view resume) -->
+        <section id="contact" class="wrapper style1 fade-up">
+            <div class="inner">
+                <h2>Get in Touch</h2>
+                <p>I'm always open to discussing new opportunities, collaborations, or simply connecting with fellow engineers and data scientists. Feel free to reach out!</p>
+                <div style="display: flex; flex-direction: column; gap: 3rem;">
+                    <!-- Large Contact Icons -->
+                    <div style="text-align: left;">
+                        <h3>Contact Me</h3>
+                        <div style="display: flex; flex-direction: column; gap: 1.5rem; margin-top: 1rem;">
+                            <a href="mailto:gabrield0907@gmail.com" class="contact-icon" style="text-decoration: none; color: inherit;">
+                                <i class="fas fa-envelope" style="font-size: 4rem;"></i>
+                            </a>
+                            <a href="tel:+17149008357" class="contact-icon" style="text-decoration: none; color: inherit;">
+                                <i class="fas fa-phone" style="font-size: 4rem;"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/gabriel-diaz0907" target="_blank" class="contact-icon" style="text-decoration: none; color: inherit;">
+                                <i class="fab fa-linkedin" style="font-size: 4rem;"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Resume Section -->
+                    <div>
+                        <h3>View Resume</h3>
+                        <p>Download my full resume for a comprehensive overview of my experience, skills, and achievements.</p>
+                        <ul class="actions">
+                            <li><a href="assets/resume/Gabriel_Diaz_Resume.pdf" class="button primary" download>Download Resume (PDF)</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer" class="wrapper style1-alt">
+        <div class="inner">
+            <ul class="menu">
+                <li>&copy; Gabriel Diaz. All rights reserved.</li>
+                <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <script>
+        // Slideshow functionality
+        let slideIndex = 1;
+        
+        function changeSlide(n) {
+            showSlides(slideIndex += n);
+        }
+        
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+        
+        function showSlides(n) {
+            let slides = document.getElementsByClassName("slide");
+            let dots = document.getElementsByClassName("dot");
+            
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove("active");
+            }
+            
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.remove("active");
+            }
+            
+            slides[slideIndex-1].classList.add("active");
+            dots[slideIndex-1].classList.add("active");
+        }
+        
+        // Auto-advance slideshow every 5 seconds
+        setInterval(function() {
+            changeSlide(1);
+        }, 5000);
+    </script>
+</body>
 </html>
