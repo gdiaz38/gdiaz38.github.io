@@ -110,39 +110,6 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
-        .personal-info {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1.5rem;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: none; /* Hidden since we moved info to main paragraph */
-        }
-
-        .personal-info h4 {
-            color: #fff;
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
-
-        .personal-info ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .personal-info li {
-            margin-bottom: 0.8rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .personal-info li::before {
-            content: "▶";
-            position: absolute;
-            left: 0;
-            color: #667eea;
-        }
-
         .slideshow-container {
             position: relative;
             max-width: 100%;
@@ -211,6 +178,119 @@
             background-color: #667eea;
         }
 
+        /* Projects Section Styles */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+            align-items: stretch;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 400px;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .project-card .icon {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .project-card h3 {
+            color: #fff;
+            margin-bottom: 1rem;
+            font-size: 1.6rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .project-card p {
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            justify-content: center;
+        }
+
+        .tech-tag {
+            background: rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.95);
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            font-weight: 500;
+        }
+
+        .project-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .project-buttons .button {
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .project-iframe {
+            width: 100%;
+            height: 700px;
+            border: none;
+            border-radius: 15px;
+            margin-top: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: #fff;
+        }
+
+        .project-showcase {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .project-showcase h3 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .project-showcase p {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+        }
+
         @media (max-width: 768px) {
             .about-layout {
                 grid-template-columns: 1fr;
@@ -220,6 +300,24 @@
             .headshot-placeholder, .headshot-image {
                 width: 250px;
                 height: 250px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .project-card {
+                min-height: auto;
+            }
+            
+            .project-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .project-iframe {
+                height: 500px;
             }
         }
     </style>
@@ -233,6 +331,7 @@
                     <li><a href="#about">About</a></li>
                     <li><a href="#experience">Experience</a></li>
                     <li><a href="#education">Education</a></li>
+                    <li><a href="#projects">Projects</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -317,7 +416,7 @@
                     </section>
                 </div>
                 <ul class="actions">
-                    <li><a href="#experience" class="button scrolly">Learn more</a></li>
+                    <li><a href="#experience" class="button scrolly">View My Experience</a></li>
                 </ul>
             </div>
         </section>
@@ -332,7 +431,7 @@
                         <h3><a href="https://www.gallo.com/" target="_blank" class="fade-link" style="color: inherit; text-decoration: none;">Gallo – Reliability & Maintenance Engineering Intern</a></h3>
                         <p><i>July 2025 – Present | Modesto, CA</i><br>
                         Collaborate with cross-functional teams to analyze bottling and harvest site equipment performance. Develop and document standard operating procedures (SOPs), time studies, and equipment capability assessments to improve training effectiveness and operational efficiency.</p>
-                        <p><strong>Skills:</strong> AutoCAD, MS Office, SAP, Data Analysis</p>
+                        <p><strong>Skills:</strong> MS Office, SAP, Data Analysis, Python</p>
                     </section>
 
                     <section style="margin-bottom: 3em; text-align: left;">
@@ -367,6 +466,9 @@
                         <p><strong>Skills:</strong> Python, Cybersecurity, Risk Assessment, Software Development, GitHub</p>
                     </section>
                 </div>
+                <ul class="actions" style="text-align: center; margin-top: 3rem;">
+                    <li><a href="#education" class="button scrolly">View My Education</a></li>
+                </ul>
             </div>
         </section>
 
@@ -389,6 +491,87 @@
                         <strong>Honors & Awards:</strong> Lawrence Livermore National Laboratory Computing Scholarship, Tapia Conference Scholarship, Frances M. Benton Scholarship, Hispanic Scholarship Fund Scholar 2x, Dean's List 5x, Chancellor's List</p>
                     </section>
                 </div>
+                <ul class="actions" style="text-align: center; margin-top: 3rem;">
+                    <li><a href="#projects" class="button scrolly">View My Projects</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="wrapper style3 fade-up">
+            <div class="inner">
+                <h2>Projects</h2>
+                <p>Explore my hands-on projects showcasing skills in statistical analysis, business intelligence, and interactive data visualization.</p>
+                
+                <!-- Projects Grid - Only Two Completed Projects -->
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div>
+                            <span class="icon solid major fa-chart-bar"></span>
+                            <h3>Movie Ratings Analysis</h3>
+                            <p>An interactive data science project analyzing movie ratings across genres and years. Features statistical analysis, data visualization, and dynamic filtering capabilities.</p>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">Chart.js</span>
+                                <span class="tech-tag">Statistical Analysis</span>
+                                <span class="tech-tag">Data Visualization</span>
+                                <span class="tech-tag">HTML/CSS</span>
+                            </div>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="#movie-analysis" class="button primary scrolly">View Live Demo</a>
+                            <a href="https://github.com/gabrieldiaz0907" target="_blank" class="button">View Code</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div>
+                            <span class="icon solid major fa-chart-line"></span>
+                            <h3>Sales Performance Dashboard</h3>
+                            <p>A comprehensive business intelligence dashboard analyzing sales performance, regional trends, and team productivity. Features real-time metrics and actionable insights.</p>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">Chart.js</span>
+                                <span class="tech-tag">Business Analytics</span>
+                                <span class="tech-tag">KPI Tracking</span>
+                                <span class="tech-tag">Data Visualization</span>
+                            </div>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="#sales-dashboard" class="button primary scrolly">View Live Demo</a>
+                            <a href="https://github.com/gabrieldiaz0907" target="_blank" class="button">View Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Featured Project Showcases -->
+                <div class="project-showcase" id="movie-analysis">
+                    <h3>Featured Project: Movie Ratings Analysis</h3>
+                    <p>Interactive dashboard demonstrating statistical analysis, data visualization, and user-driven data exploration.</p>
+                    
+                    <iframe src="projects/movie-analysis.html" 
+                            class="project-iframe"
+                            title="Movie Ratings Analysis Project">
+                        <p>Your browser does not support iframes. <a href="projects/movie-analysis.html" target="_blank">View the project directly here</a>.</p>
+                    </iframe>
+                </div>
+
+                <div class="project-showcase" id="sales-dashboard">
+                    <h3>Featured Project: Sales Performance Dashboard</h3>
+                    <p>Comprehensive business analytics platform showcasing sales performance metrics and predictive insights.</p>
+                    
+                    <iframe src="projects/sales-dashboard.html" 
+                            class="project-iframe"
+                            title="Sales Performance Dashboard Project">
+                        <p>Your browser does not support iframes. <a href="projects/sales-dashboard.html" target="_blank">View the project directly here</a>.</p>
+                    </iframe>
+                </div>
+
+                <ul class="actions" style="text-align: center; margin-top: 3rem;">
+                    <li><a href="#contact" class="button scrolly">Get in Touch</a></li>
+                </ul>
             </div>
         </section>
 
