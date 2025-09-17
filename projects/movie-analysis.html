@@ -600,16 +600,6 @@
                 parseFloat(movie['Rating']) > 0 &&
                 movie['Movie Name']
             ).map(movie => {
-                // Extract year from various sources
-                let year = 2000; 
-                
-                if (movie['Year']) {
-                    year = parseInt(movie['Year']) || 2000;
-                } else if (movie['Runtime']) {
-                    const yearMatch = movie['Runtime']?.toString().match(/\b(19|20)\d{2}\b/);
-                    if (yearMatch) year = parseInt(yearMatch[0]);
-                }
-
                 // Parse runtime
                 let runtime = 0;
                 if (movie['Runtime']) {
@@ -630,7 +620,7 @@
                 }
                 const primaryGenre = genres[0] || 'Unknown';
 
-                // Get directors
+                // Get directors - clean up the array format
                 let director = 'Unknown';
                 if (movie['Directors']) {
                     if (typeof movie['Directors'] === 'string') {
@@ -645,7 +635,6 @@
                     id: movie['ID'] || 0,
                     title: movie['Movie Name'] || '',
                     rating: parseFloat(movie['Rating']) || 0,
-                    year: year,
                     genre: primaryGenre,
                     genres: genres, // Store all genres
                     director: director,
@@ -898,21 +887,21 @@
             document.getElementById('recordCount').textContent = 
                 `Showing ${displayMovies.length} of ${filteredMovies.length} movies`;
             
-            // Update table header
+            // Update table header - removed Year column
             const tableHead = document.getElementById('tableHead');
             tableHead.innerHTML = `
                 <tr>
                     <th>Rank</th>
                     <th>Title</th>
                     <th>Rating</th>
-                    <th>Year</th>
+                    <th>Runtime</th>
                     <th>Genre</th>
                     <th>Director</th>
                     <th>Votes</th>
                 </tr>
             `;
             
-            // Update table body
+            // Update table body - removed year display
             const tableBody = document.getElementById('tableBody');
             tableBody.innerHTML = displayMovies.map((movie, index) => {
                 let ratingBadge = 'rating-average';
@@ -929,7 +918,7 @@
                         <td><strong>#${index + 1}</strong></td>
                         <td><strong>${movie.title}</strong></td>
                         <td><span class="rating-badge ${ratingBadge}">${movie.rating.toFixed(1)}</span></td>
-                        <td>${movie.year || 'N/A'}</td>
+                        <td>${movie.runtime ? movie.runtime + ' min' : 'N/A'}</td>
                         <td>${genreDisplay}</td>
                         <td>${movie.director}</td>
                         <td>${movie.votes.toLocaleString()}</td>
@@ -939,10 +928,10 @@
         }
 
         function updateInsights() {
-            // Top movies insights
+            // Top movies insights - removed year references
             const topMovies = filteredMovies.slice(0, 5);
             const topMoviesText = topMovies.map((movie, i) => 
-                `<strong>${i + 1}. ${movie.title}</strong> (${movie.rating}/10, ${movie.year})`
+                `<strong>${i + 1}. ${movie.title}</strong> (${movie.rating}/10)`
             ).join('<br>');
 
             document.getElementById('topMoviesInsights').innerHTML = `
@@ -1007,11 +996,16 @@
             const totalVotes = filteredMovies.reduce((sum, m) => sum + m.votes, 0);
             const avgVotes = totalVotes / filteredMovies.length;
 
+            // Add runtime statistics
+            const runtimes = filteredMovies.filter(m => m.runtime > 0).map(m => m.runtime);
+            const avgRuntime = runtimes.length > 0 ? runtimes.reduce((sum, r) => sum + r, 0) / runtimes.length : 0;
+
             document.getElementById('statisticalInsights').innerHTML = `
                 <p><strong>Mean Rating:</strong> ${avgRating.toFixed(2)}/10</p>
                 <p><strong>Median Rating:</strong> ${median.toFixed(1)}/10</p>
                 <p><strong>Standard Deviation:</strong> ${stdDev.toFixed(2)}</p>
                 <p><strong>Distribution:</strong> ${excellentMovies} excellent (9.0+), ${goodMovies} very good (8.0-8.9)</p>
+                <p><strong>Average Runtime:</strong> ${Math.floor(avgRuntime)} minutes</p>
                 <p><strong>Average Votes:</strong> ${Math.floor(avgVotes).toLocaleString()} per movie</p>
             `;
         }
