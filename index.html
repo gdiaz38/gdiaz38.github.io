@@ -71,6 +71,98 @@
             opacity: 0.7;
         }
 
+        /* Enhanced clickable title styles */
+        .clickable-title {
+            position: relative;
+            display: inline-block;
+            color: #667eea !important;
+            text-decoration: none !important;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 2px;
+        }
+
+        .clickable-title:hover {
+            color: #764ba2 !important;
+            border-bottom: 2px solid #667eea;
+            transform: translateY(-1px);
+        }
+
+        .clickable-title::after {
+            content: " 🔗";
+            font-size: 0.8em;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .clickable-title:hover::after {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        /* Alternative style with external link icon */
+        .external-link {
+            position: relative;
+            display: inline-block;
+            color: #667eea !important;
+            text-decoration: none !important;
+            transition: all 0.3s ease;
+            padding-right: 1.5em;
+        }
+
+        .external-link::after {
+            content: "\f35d"; /* Font Awesome external link icon */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: 0.8em;
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+
+        .external-link:hover {
+            color: #764ba2 !important;
+            text-shadow: 0 0 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .external-link:hover::after {
+            opacity: 1;
+            transform: translateX(2px);
+        }
+
+        /* Tooltip for clickable titles */
+        .tooltip {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .tooltip::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .tooltip:hover::before {
+            opacity: 1;
+            visibility: visible;
+            top: -45px;
+        }
+
         /* New styles for enhanced about section */
         .about-layout {
             display: grid;
@@ -291,6 +383,23 @@
             margin-bottom: 2rem;
         }
 
+        /* Info callout for clickable titles */
+        .clickable-info {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9em;
+        }
+
+        .clickable-info i {
+            color: #667eea;
+            margin-right: 0.5rem;
+        }
+
         @media (max-width: 768px) {
             .about-layout {
                 grid-template-columns: 1fr;
@@ -425,10 +534,17 @@
         <section id="experience" class="wrapper style3 fade-up">
             <div class="inner">
                 <h2>Experience</h2>
+                
+                <!-- Info callout -->
+                <div class="clickable-info">
+                    <i class="fas fa-info-circle"></i>
+                    Click on company names below to visit their websites and learn more!
+                </div>
+                
                 <div style="max-width: 800px; margin: 0 auto;">
                     <section style="margin-bottom: 3em; text-align: left;">
                         <span class="icon solid major fa-industry"></span>
-                        <h3><a href="https://www.gallo.com/" target="_blank" class="fade-link" style="color: inherit; text-decoration: none;">Gallo – Reliability & Maintenance Engineering Intern</a></h3>
+                        <h3><a href="https://www.gallo.com/" target="_blank" class="external-link tooltip" data-tooltip="Click to visit Gallo's website">Gallo</a> – Reliability & Maintenance Engineering Intern</h3>
                         <p><i>July 2025 – Present | Modesto, CA</i><br>
                         Collaborate with cross-functional teams to analyze bottling and harvest site equipment performance. Develop and document standard operating procedures (SOPs), time studies, and equipment capability assessments to improve training effectiveness and operational efficiency.</p>
                         <p><strong>Skills:</strong> MS Office, SAP, Data Analysis, Python</p>
@@ -436,7 +552,7 @@
 
                     <section style="margin-bottom: 3em; text-align: left;">
                         <span class="icon solid major fa-flask"></span>
-                        <h3><a href="https://www.mocalab.org" target="_blank" class="fade-link" style="color: inherit; text-decoration: none;">UC Merced School of Engineering – Student Research Assistant</a></h3>
+                        <h3><a href="https://www.mocalab.org" target="_blank" class="external-link tooltip" data-tooltip="Visit the MoCa Lab website">UC Merced School of Engineering</a> – Student Research Assistant</h3>
                         <p><i>Sept 2024 – June 2025 | Merced, CA</i><br>
                         Developed privacy-conscious AI models by implementing secure machine learning protocols in Python. Spearheaded GPU programming projects, optimizing training times for large-scale models by 25%. Contributed to cutting-edge innovations in privacy-preserving AI under a CAHSI-Google-funded initiative.</p>
                         <p><strong>Skills:</strong> Python, Google Cloud Platform (GCP), Google Colab, Hugging Face Transformers, Unsloth, GitHub</p>
@@ -444,7 +560,7 @@
 
                     <section style="margin-bottom: 3em; text-align: left;">
                         <span class="icon solid major fa-microscope"></span>
-                        <h3><a href="https://www.languagelearningandteachinglab.org" target="_blank" class="fade-link" style="color: inherit; text-decoration: none;">UC Merced School of Social Sciences – Student Research Assistant</a></h3>
+                        <h3><a href="https://www.languagelearningandteachinglab.org" target="_blank" class="external-link tooltip" data-tooltip="Learn about the Language Learning Lab">UC Merced School of Social Sciences</a> – Student Research Assistant</h3>
                         <p><i>Mar 2023 – Sept 2024 | Merced, CA</i><br>
                         Automated recording and cataloging workflows, boosting data analysis efficiency by 20%. Generated comprehensive research documentation, enabling improved experimental reproducibility. Managed robotic recording equipment and ensured data accuracy.</p>
                         <p><strong>Skills:</strong> Python, Observer XT, Arduino, Data Analysis, GitHub</p>
@@ -452,7 +568,7 @@
 
                     <section style="margin-bottom: 3em; text-align: left;">
                         <span class="icon solid major fa-building"></span>
-                        <h3><a href="https://www.tranetechnologies.com/en/index.html" target="_blank" class="fade-link" style="color: inherit; text-decoration: none;">Trane Technologies – Technical Sales Engineering Intern</a></h3>
+                        <h3><a href="https://www.tranetechnologies.com/en/index.html" target="_blank" class="external-link tooltip" data-tooltip="Explore Trane Technologies">Trane Technologies</a> – Technical Sales Engineering Intern</h3>
                         <p><i>May 2024 – Aug 2024 | Brea, CA</i><br>
                         Acquired expertise in building automation systems and controls through hands-on project experience. Collaborated with sales engineers to implement HVAC solutions, enhancing commercial systems knowledge.</p>
                         <p><strong>Skills:</strong> AutoCAD, MS Office, Technical Sales, HVAC Systems</p>
@@ -460,7 +576,7 @@
 
                     <section style="margin-bottom: 3em; text-align: left;">
                         <span class="icon solid major fa-shield-alt"></span>
-                        <h3><a href="https://www.medtronic.com/en-us/index.html" target="_blank" class="fade-link" style="color: inherit; text-decoration: none;">Medtronic – Product Security Engineering Intern</a></h3>
+                        <h3><a href="https://www.medtronic.com/en-us/index.html" target="_blank" class="external-link tooltip" data-tooltip="Visit Medtronic's website">Medtronic</a> – Product Security Engineering Intern</h3>
                         <p><i>June 2023 – Aug 2023 | Mounds View, MN</i><br>
                         Optimized Python scripts for software bill of materials (SBOM) generation, reducing processing time by 30%. Conducted risk assessments for software-enabled medical devices, identifying key candidates for SBOM development.</p>
                         <p><strong>Skills:</strong> Python, Cybersecurity, Risk Assessment, Software Development, GitHub</p>
@@ -476,19 +592,26 @@
         <section id="education" class="wrapper style2 fade-up">
             <div class="inner">
                 <h2>Education</h2>
+                
+                <!-- Info callout -->
+                <div class="clickable-info">
+                    <i class="fas fa-graduation-cap"></i>
+                    Click on university names to explore program details!
+                </div>
+                
                 <div class="features">
                     <section>
                         <span class="icon solid major fa-graduation-cap"></span>
-                        <h3><a href="https://engineeringonline.ucr.edu/data-science/" target="_blank" class="fade-link" style="color: inherit; text-decoration: none;">University of California, Riverside</a></h3>
+                        <h3><a href="https://engineeringonline.ucr.edu/data-science/" target="_blank" class="clickable-title tooltip" data-tooltip="Explore UC Riverside's Data Science program">University of California, Riverside</a></h3>
                         <p><strong>Master of Science in Engineering, Data Science</strong><br/>
                         Expected June 2027</p>
                     </section>
                     <section>
                         <span class="icon solid major fa-university"></span>
-                        <h3><a href="https://www.ucmerced.edu/majors-and-minors/computer-science-engineering-bs" target="_blank" class="fade-link" style="color: inherit; text-decoration: none;">University of California, Merced</a></h3>
+                        <h3><a href="https://www.ucmerced.edu/majors-and-minors/computer-science-engineering-bs" target="_blank" class="clickable-title tooltip" data-tooltip="Learn about UC Merced's CSE program">University of California, Merced</a></h3>
                         <p><strong>Bachelor of Science in Computer Science and Engineering</strong><br/>
                         GPA: 3.63 | Graduated May 2025<br/>
-                        <strong>Honors & Awards:</strong> Lawrence Livermore National Laboratory Computing Scholarship, Tapia Conference Scholarship, Frances M. Benton Scholarship, Hispanic Scholarship Fund Scholar 2x, Dean's List 5x, Chancellor's List, Graduation Honors</p>
+                        <strong>Honors & Awards:</strong> Lawrence Livermore National Laboratory Computing Scholarship, Tapia Conference Scholarship, Frances M. Benton Scholarship, Hispanic Scholarship Fund Scholar 2x, Dean's List 5x, Chancellor's List</p>
                     </section>
                 </div>
                 <ul class="actions" style="text-align: center; margin-top: 3rem;">
@@ -664,4 +787,3 @@
     </script>
 </body>
 </html>
-
