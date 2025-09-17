@@ -37,6 +37,7 @@
     .metric-change { font-size: 0.9rem; font-weight: 500; }
     .metric-change.positive { color: #059669; }
     .metric-change.negative { color: #dc2626; }
+    .metric-change.neutral { color: #6b7280; }
     .charts-section { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-bottom: 30px; }
     .chart-container { background: white; padding: 24px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
     .chart-title { font-size: 1.2rem; font-weight: 600; color: #1e293b; margin-bottom: 20px; }
@@ -170,22 +171,134 @@
       return isNaN(dt) ? null : dt;
     }
 
-    // --- Load Superstore CSV from same directory ---
+    // --- Calculate period-over-period changes ---
+    function calculatePeriodChange(currentData, allData) {
+      // Get date range of current filtered data
+      const currentDates = currentData
+        .map(row => parseDate(row['Order Date']))
+        .filter(d => d)
+        .sort((a, b) => a - b);
+      
+      if (currentDates.length === 0) return { sales: 0, profit: 0, orders: 0, avgOrder: 0 };
+      
+      const currentStart = currentDates[0];
+      const currentEnd = currentDates[currentDates.length - 1];
+      const periodDays = Math.ceil((currentEnd - currentStart) / (1000 * 60 * 60 * 24));
+      
+      // Calculate previous period (same duration, immediately before current period)
+      const prevEnd = new Date(currentStart.getTime() - 1);
+      const prevStart = new Date(prevEnd.getTime() - (periodDays * 24 * 60 * 60 * 1000));
+      
+      // Filter data for previous period
+      const prevData = allData.filter(row => {
+        const date = parseDate(row['Order Date']);
+        return date && date >= prevStart && date <= prevEnd;
+      });
+      
+      // Calculate current metrics
+      const currentSales = currentData.reduce((s, r) => s + (parseFloat(r.Sales) || 0), 0);
+      const currentProfit = currentData.reduce((s, r) => s + (parseFloat(r.Profit) || 0), 0);
+      const currentOrders = currentData.length;
+      const currentAvgOrder = currentOrders ? currentSales / currentOrders : 0;
+      
+      // Calculate previous metrics
+      const prevSales = prevData.reduce((s, r) => s + (parseFloat(r.Sales) || 0), 0);
+      const prevProfit = prevData.reduce((s, r) => s + (parseFloat(r.Profit) || 0), 0);
+      const prevOrders = prevData.length;
+      const prevAvgOrder = prevOrders ? prevSales / prevOrders : 0;
+      
+      // Calculate percentage changes
+      const salesChange = prevSales ? ((currentSales - prevSales) / prevSales) * 100 : 0;
+      const profitChange = prevProfit ? ((currentProfit - prevProfit) / prevProfit) * 100 : 0;
+      const ordersChange = prevOrders ? ((currentOrders - prevOrders) / prevOrders) * 100 : 0;
+      const avgOrderChange = prevAvgOrder ? ((currentAvgOrder - prevAvgOrder) / prevAvgOrder) * 100 : 0;
+      
+      return {
+        sales: salesChange,
+        profit: profitChange,
+        orders: ordersChange,
+        avgOrder: avgOrderChange
+      };
+    }
+
+    // --- Format percentage change ---
+    function formatChange(value) {
+      if (Math.abs(value) < 0.1) {
+        return { text: '±0.0%', class: 'neutral' };
+      }
+      const sign = value >= 0 ? '+' : '';
+      const className = value >= 0 ? 'positive' : 'negative';
+      return { text: `${sign}${value.toFixed(1)}%`, class: className };
+    }
+
+    // --- Load Superstore CSV data (demo data) ---
     function loadSuperstoreCSV() {
       document.getElementById('loading').style.display = 'block';
       document.getElementById('uploadSection').style.display = 'none';
-      Papa.parse('Sample - Superstore.csv', {
-        download: true,
-        header: true,
-        skipEmptyLines: true,
-        dynamicTyping: true,
-        complete: (results) => processData(results.data),
-        error: () => {
-          alert('Could not load superstore.csv. Make sure it is in the same folder as this HTML file.');
-          document.getElementById('loading').style.display = 'none';
-          document.getElementById('uploadSection').style.display = 'block';
-        }
-      });
+      
+      // Generate sample data similar to Superstore format
+      const sampleData = generateSampleData();
+      processData(sampleData);
+    }
+
+    function generateSampleData() {
+      const categories = ['Furniture', 'Office Supplies', 'Technology'];
+      const subCategories = {
+        'Furniture': ['Bookcases', 'Chairs', 'Tables'],
+        'Office Supplies': ['Labels', 'Paper', 'Binders', 'Storage'],
+        'Technology': ['Phones', 'Computers', 'Accessories']
+      };
+      const regions = ['South', 'West', 'East', 'Central'];
+      const segments = ['Consumer', 'Corporate', 'Home Office'];
+      const shipModes = ['Standard Class', 'Second Class', 'First Class', 'Same Day'];
+
+      const data = [];
+      const startDate = new Date('2019-01-01');
+      const endDate = new Date('2021-12-31');
+
+      for (let i = 1; i <= 1000; i++) {
+        const category = categories[Math.floor(Math.random() * categories.length)];
+        const subCategory = subCategories[category][Math.floor(Math.random() * subCategories[category].length)];
+        const region = regions[Math.floor(Math.random() * regions.length)];
+        const segment = segments[Math.floor(Math.random() * segments.length)];
+        const shipMode = shipModes[Math.floor(Math.random() * shipModes.length)];
+        
+        // Random date within range
+        const orderDate = new Date(startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime()));
+        const shipDate = new Date(orderDate.getTime() + Math.random() * 7 * 24 * 60 * 60 * 1000);
+        
+        const quantity = Math.floor(Math.random() * 5) + 1;
+        const unitPrice = Math.random() * 500 + 50;
+        const discount = Math.random() * 0.5;
+        const sales = quantity * unitPrice * (1 - discount);
+        const profit = sales * (Math.random() * 0.3 - 0.05); // -5% to 25% margin
+
+        data.push({
+          'Row ID': i,
+          'Order ID': `US-${orderDate.getFullYear()}-${String(Math.floor(Math.random() * 999999)).padStart(6, '0')}`,
+          'Order Date': `${orderDate.getMonth() + 1}/${orderDate.getDate()}/${orderDate.getFullYear().toString().slice(-2)}`,
+          'Ship Date': `${shipDate.getMonth() + 1}/${shipDate.getDate()}/${shipDate.getFullYear().toString().slice(-2)}`,
+          'Ship Mode': shipMode,
+          'Customer ID': `CG-${String(Math.floor(Math.random() * 99999)).padStart(5, '0')}`,
+          'Customer Name': `Customer ${i}`,
+          'Segment': segment,
+          'Country/Region': 'United States',
+          'City': 'Sample City',
+          'State': 'Sample State',
+          'Postal Code': String(Math.floor(Math.random() * 90000) + 10000),
+          'Region': region,
+          'Product ID': `${category.substring(0,3).toUpperCase()}-${subCategory.substring(0,2).toUpperCase()}-${String(Math.floor(Math.random() * 99999999)).padStart(8, '0')}`,
+          'Category': category,
+          'Sub-Category': subCategory,
+          'Product Name': `Sample ${subCategory} Product ${i}`,
+          'Sales': parseFloat(sales.toFixed(2)),
+          'Quantity': quantity,
+          'Discount': parseFloat(discount.toFixed(2)),
+          'Profit': parseFloat(profit.toFixed(2))
+        });
+      }
+      
+      return data;
     }
 
     function processData(data) {
@@ -221,28 +334,35 @@
       const totalSales = salesData.reduce((s, r) => s + (parseFloat(r.Sales) || 0), 0);
       const totalProfit = salesData.reduce((s, r) => s + (parseFloat(r.Profit) || 0), 0);
       const avgOrderValue = salesData.length ? totalSales / salesData.length : 0;
+      
+      // Calculate period-over-period changes
+      const changes = calculatePeriodChange(salesData, originalData);
+      const salesChange = formatChange(changes.sales);
+      const profitChange = formatChange(changes.profit);
+      const ordersChange = formatChange(changes.orders);
+      const avgOrderChange = formatChange(changes.avgOrder);
 
       const metricsGrid = document.getElementById('metricsGrid');
       metricsGrid.innerHTML = `
         <div class="metric-card">
           <div class="metric-label">Total Sales</div>
           <div class="metric-value">$${totalSales.toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
-          <div class="metric-change positive">+12.5% vs last period</div>
+          <div class="metric-change ${salesChange.class}">${salesChange.text} vs last period</div>
         </div>
         <div class="metric-card">
           <div class="metric-label">Total Profit</div>
           <div class="metric-value">$${totalProfit.toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
-          <div class="metric-change positive">+8.3% vs last period</div>
+          <div class="metric-change ${profitChange.class}">${profitChange.text} vs last period</div>
         </div>
         <div class="metric-card">
           <div class="metric-label">Total Orders</div>
           <div class="metric-value">${salesData.length.toLocaleString()}</div>
-          <div class="metric-change positive">+15.7% vs last period</div>
+          <div class="metric-change ${ordersChange.class}">${ordersChange.text} vs last period</div>
         </div>
         <div class="metric-card">
           <div class="metric-label">Avg Order Value</div>
           <div class="metric-value">$${avgOrderValue.toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
-          <div class="metric-change negative">-2.1% vs last period</div>
+          <div class="metric-change ${avgOrderChange.class}">${avgOrderChange.text} vs last period</div>
         </div>`;
     }
 
@@ -402,7 +522,7 @@
       insights.innerHTML = `
         <div class="insight-item"><div class="insight-text">Total sales across current filters: <strong>$${totalSales.toLocaleString('en-US', { maximumFractionDigits: 0 })}</strong></div></div>
         ${topCat ? `<div class="insight-item"><div class="insight-text">Top category: <strong>${topCat[0]}</strong> — $${topCat[1].toLocaleString('en-US', { maximumFractionDigits: 0 })}</div></div>` : ''}
-        ${topReg ? `<div class="insight-item"><div class="insight-text">Best region: <strong>${topReg[0]}</strong> — $${topReg[1].toLocaleString('en-US', { maximumFractionDigits: 0 })}</div></div>` : ''}
+        ${topReg ? `<div class="insight-item"><div class="insight-text">Best region: <strong>${topReg[0]}</strong> — ${topReg[1].toLocaleString('en-US', { maximumFractionDigits: 0 })}</div></div>` : ''}
         <div class="insight-item"><div class="insight-text">Coverage: ${salesData.length} transactions across ${Object.keys(byCat).length} categories and ${Object.keys(byReg).length} regions.</div></div>`;
     }
 
