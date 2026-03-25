@@ -640,77 +640,134 @@
         <section id="projects" class="wrapper style3 fade-up">
             <div class="inner">
                 <h2>Projects</h2>
-                <p>Explore my hands-on projects showcasing skills in statistical analysis, business intelligence, and interactive data visualization.</p>
-                
-                <!-- Projects Grid - Only Two Completed Projects -->
+                <p>Industry-targeted ML systems built for automotive, MedTech, industrial, and fintech sectors. Each project is deployed as a REST API with a live dashboard and available on GitHub.</p>
+
                 <div class="projects-grid">
+
+                    <!-- Project 1: EV Battery -->
                     <div class="project-card">
                         <div>
-                            <span class="icon solid major fa-chart-bar"></span>
-                            <h3>Movie Ratings Analysis</h3>
-                            <p>An interactive data science project analyzing movie ratings across genres and years. Features statistical analysis, data visualization, and dynamic filtering capabilities.</p>
+                            <div class="icon"><i class="fas fa-battery-three-quarters"></i></div>
+                            <h3>EV Battery Degradation Predictor</h3>
+                            <p>Predicts State of Health (SoH) and Remaining Useful Life (RUL) of lithium-ion batteries using real NASA aging data. 2-layer LSTM achieves <strong>8.36% MAPE on cross-battery generalization</strong> — tested on batteries never seen during training. Deployed as a FastAPI REST endpoint with live dashboard.</p>
                             <div class="tech-stack">
-                                <span class="tech-tag">Python</span>
-                                <span class="tech-tag">JavaScript</span>
-                                <span class="tech-tag">Chart.js</span>
-                                <span class="tech-tag">Statistical Analysis</span>
-                                <span class="tech-tag">Data Visualization</span>
-                                <span class="tech-tag">HTML/CSS</span>
+                                <span class="tech-tag">PyTorch</span>
+                                <span class="tech-tag">LSTM</span>
+                                <span class="tech-tag">FastAPI</span>
+                                <span class="tech-tag">Streamlit</span>
+                                <span class="tech-tag">Feature Engineering</span>
+                                <span class="tech-tag">NASA Dataset</span>
+                            </div>
+                            <div style="background:rgba(255,255,255,0.06);border-radius:10px;padding:1rem;margin-bottom:1rem;">
+                                <div style="display:flex;justify-content:space-around;text-align:center;">
+                                    <div><div style="font-size:1.4rem;font-weight:700;color:#00d4aa;">8.36%</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.6);">MAPE</div></div>
+                                    <div><div style="font-size:1.4rem;font-weight:700;color:#00d4aa;">0.13 Ah</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.6);">MAE</div></div>
+                                    <div><div style="font-size:1.4rem;font-weight:700;color:#00d4aa;">504</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.6);">Test Cycles</div></div>
+                                </div>
                             </div>
                         </div>
                         <div class="project-buttons">
-                            <a href="#movie-analysis" class="button primary scrolly">View Live Demo</a>
+                            <a href="https://github.com/gdiaz38/ev-battery-degradation" target="_blank" class="button primary">View on GitHub</a>
                         </div>
                     </div>
 
+                    <!-- Project 2: ECG Anomaly -->
                     <div class="project-card">
                         <div>
-                            <span class="icon solid major fa-chart-line"></span>
-                            <h3>Sales Performance Dashboard</h3>
-                            <p>A comprehensive business intelligence dashboard analyzing sales performance, regional trends, and team productivity. Features real-time metrics and actionable insights.</p>
+                            <div class="icon"><i class="fas fa-heartbeat"></i></div>
+                            <h3>FDA-Grade ECG Anomaly Detector</h3>
+                            <p>Two-stage unsupervised cardiac anomaly detection trained on 87k real MIT-BIH ECG beats. Isolation Forest + LSTM Autoencoder with <strong>SHAP explainability</strong> per prediction. FastAPI backend with <strong>FDA 21 CFR Part 11</strong> compliant audit logging — immutable records with UUID, timestamp, and waveform hash.</p>
                             <div class="tech-stack">
-                                <span class="tech-tag">Python</span>
-                                <span class="tech-tag">JavaScript</span>
-                                <span class="tech-tag">Chart.js</span>
-                                <span class="tech-tag">Business Analytics</span>
-                                <span class="tech-tag">KPI Tracking</span>
-                                <span class="tech-tag">Data Visualization</span>
+                                <span class="tech-tag">PyTorch</span>
+                                <span class="tech-tag">SHAP</span>
+                                <span class="tech-tag">Isolation Forest</span>
+                                <span class="tech-tag">FastAPI</span>
+                                <span class="tech-tag">FDA 21 CFR Part 11</span>
+                                <span class="tech-tag">MIT-BIH Dataset</span>
+                            </div>
+                            <div style="background:rgba(255,255,255,0.06);border-radius:10px;padding:1rem;margin-bottom:1rem;">
+                                <div style="display:flex;justify-content:space-around;text-align:center;">
+                                    <div><div style="font-size:1.4rem;font-weight:700;color:#ff6b6b;">0.75</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.6);">ROC-AUC</div></div>
+                                    <div><div style="font-size:1.4rem;font-weight:700;color:#ff6b6b;">87k</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.6);">ECG Beats</div></div>
+                                    <div><div style="font-size:1.4rem;font-weight:700;color:#ff6b6b;">21 CFR</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.6);">Compliant</div></div>
+                                </div>
                             </div>
                         </div>
                         <div class="project-buttons">
-                            <a href="#sales-dashboard" class="button primary scrolly">View Live Demo</a>
+                            <a href="https://github.com/gdiaz38/ecg-anomaly-detector" target="_blank" class="button primary">View on GitHub</a>
                         </div>
                     </div>
+
+                    <!-- Project 3: Predictive Maintenance -->
+                    <div class="project-card">
+                        <div>
+                            <div class="icon"><i class="fas fa-cogs"></i></div>
+                            <h3>Predictive Maintenance IoT Dashboard</h3>
+                            <p>XGBoost-based Remaining Useful Life predictor for turbofan engines using NASA CMAPSS sensor data. Engineered 60 features including 30-cycle rolling mean, std, and slope per sensor. Achieves <strong>3.30 cycle MAE in the critical failure zone</strong> (RUL &lt; 25 cycles). REST API with real-time fleet monitoring.</p>
+                            <div class="tech-stack">
+                                <span class="tech-tag">XGBoost</span>
+                                <span class="tech-tag">IoT Sensors</span>
+                                <span class="tech-tag">FastAPI</span>
+                                <span class="tech-tag">Streamlit</span>
+                                <span class="tech-tag">Rolling Features</span>
+                                <span class="tech-tag">NASA CMAPSS</span>
+                            </div>
+                            <div style="background:rgba(255,255,255,0.06);border-radius:10px;padding:1rem;margin-bottom:1rem;">
+                                <div style="display:flex;justify-content:space-around;text-align:center;">
+                                    <div><div style="font-size:1.4rem;font-weight:700;color:#ffa500;">3.30</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.6);">Critical MAE</div></div>
+                                    <div><div style="font-size:1.4rem;font-weight:700;color:#ffa500;">7.68</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.6);">Overall MAE</div></div>
+                                    <div><div style="font-size:1.4rem;font-weight:700;color:#ffa500;">60</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.6);">Features</div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="https://github.com/gdiaz38/predictive-maintenance" target="_blank" class="button primary">View on GitHub</a>
+                        </div>
+                    </div>
+
+                    <!-- Project 4: Fraud Detection -->
+                    <div class="project-card">
+                        <div>
+                            <div class="icon"><i class="fas fa-shield-alt"></i></div>
+                            <h3>Real-Time Fraud Detection Engine</h3>
+                            <p>Two-stage fraud detection on 284k real credit card transactions with a <strong>1:577 class imbalance</strong>. XGBoost with scale_pos_weight + card velocity anomaly detection + Redis-pattern feature store. Graph anomaly layer using NetworkX for transaction network analysis.</p>
+                            <div class="tech-stack">
+                                <span class="tech-tag">XGBoost</span>
+                                <span class="tech-tag">NetworkX</span>
+                                <span class="tech-tag">Feature Store</span>
+                                <span class="tech-tag">FastAPI</span>
+                                <span class="tech-tag">Graph Analytics</span>
+                                <span class="tech-tag">284k Transactions</span>
+                            </div>
+                            <div style="background:rgba(255,255,255,0.06);border-radius:10px;padding:1rem;margin-bottom:1rem;">
+                                <div style="display:flex;justify-content:space-around;text-align:center;">
+                                    <div><div style="font-size:1.4rem;font-weight:700;color:#667eea;">0.98</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.6);">ROC-AUC</div></div>
+                                    <div><div style="font-size:1.4rem;font-weight:700;color:#667eea;">0.76</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.6);">PR-AUC</div></div>
+                                    <div><div style="font-size:1.4rem;font-weight:700;color:#667eea;">1:577</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.6);">Imbalance</div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="https://github.com/gdiaz38/fraud-detection-engine" target="_blank" class="button primary">View on GitHub</a>
+                        </div>
+                    </div>
+
                 </div>
 
-                <!-- Featured Project Showcases -->
-                <div class="project-showcase" id="movie-analysis">
-                    <h3>Featured Project: Movie Ratings Analysis</h3>
-                    <p>Interactive dashboard demonstrating statistical analysis, data visualization, and user-driven data exploration.</p>
-                    
-                    <iframe src="projects/movie-analysis.html" 
-                            class="project-iframe"
-                            title="Movie Ratings Analysis Project">
-                        <p>Your browser does not support iframes. <a href="projects/movie-analysis.html" target="_blank">View the project directly here</a>.</p>
-                    </iframe>
+                <!-- GitHub CTA -->
+                <div style="text-align:center;margin-top:3rem;padding:2rem;background:rgba(255,255,255,0.04);border-radius:15px;border:1px solid rgba(255,255,255,0.08);">
+                    <h3 style="color:#fff;margin-bottom:0.5rem;">All projects are live on GitHub</h3>
+                    <p style="color:rgba(255,255,255,0.7);margin-bottom:1.5rem;">Each includes full source code, README, trained models, and deployment instructions.</p>
+                    <a href="https://github.com/gdiaz38" target="_blank" class="button">
+                        <i class="fab fa-github"></i> View All on GitHub
+                    </a>
                 </div>
 
-                <div class="project-showcase" id="sales-dashboard">
-                    <h3>Featured Project: Sales Performance Dashboard</h3>
-                    <p>Comprehensive business analytics platform showcasing sales performance metrics and predictive insights.</p>
-                    
-                    <iframe src="projects/sales-dashboard.html" 
-                            class="project-iframe"
-                            title="Sales Performance Dashboard Project">
-                        <p>Your browser does not support iframes. <a href="projects/sales-dashboard.html" target="_blank">View the project directly here</a>.</p>
-                    </iframe>
-                </div>
-
-                <ul class="actions" style="text-align: center; margin-top: 3rem;">
+                <ul class="actions" style="text-align:center;margin-top:3rem;">
                     <li><a href="#contact" class="button scrolly">Get in Touch</a></li>
                 </ul>
             </div>
-        </section>
+        </section>        
 
         <!-- Contact (view resume) -->
         <section id="contact" class="wrapper style1 fade-up">
