@@ -1,0 +1,521 @@
+<!DOCTYPE HTML>
+<!--
+  Portfolio AI Agent — Gabriel Diaz
+  Built on Hyperspace by HTML5 UP
+-->
+<html>
+<head>
+  <title>Portfolio Agent — Gabriel Diaz</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+  <style>
+    :root {
+      --accent:      #5e81f4;
+      --accent-glow: rgba(94,129,244,0.18);
+      --surface:     rgba(255,255,255,0.04);
+      --surface-2:   rgba(255,255,255,0.07);
+      --border:      rgba(255,255,255,0.08);
+      --user-bg:     rgba(94,129,244,0.15);
+      --agent-bg:    rgba(255,255,255,0.05);
+      --text-dim:    rgba(255,255,255,0.5);
+    }
+
+    /* ── Stats bar ──────────────────────────────────────────────────── */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    @media (max-width: 600px) { .stats-bar { grid-template-columns: repeat(2,1fr); } }
+
+    .stat-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+    }
+    .stat-value {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--accent);
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    /* ── Grid ───────────────────────────────────────────────────────── */
+    .agent-grid {
+      display: grid;
+      grid-template-columns: 290px 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 900px) { .agent-grid { grid-template-columns: 1fr; } }
+
+    /* ── Project sidebar ────────────────────────────────────────────── */
+    .sidebar-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 0.85rem;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.8rem 1rem;
+      margin-bottom: 0.45rem;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+      display: block;
+      text-decoration: none;
+    }
+    .project-card:hover {
+      background: var(--surface-2);
+      border-color: var(--accent);
+      transform: translateX(4px);
+      text-decoration: none;
+    }
+    .project-card-name {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.3;
+      margin-bottom: 0.2rem;
+    }
+    .project-card-cat {
+      font-size: 0.65rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .project-card-links {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.4rem;
+    }
+    .project-card-links a {
+      font-size: 0.63rem;
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.12rem 0.4rem;
+      text-decoration: none;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .project-card-links a:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ── Chat ───────────────────────────────────────────────────────── */
+    .chat-wrapper { display: flex; flex-direction: column; gap: 1rem; }
+
+    .chat-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      height: 460px;
+      overflow-y: auto;
+      padding: 1.5rem;
+      scroll-behavior: smooth;
+    }
+    .chat-box::-webkit-scrollbar       { width: 4px; }
+    .chat-box::-webkit-scrollbar-track { background: transparent; }
+    .chat-box::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    .welcome-msg {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      color: var(--text-dim);
+    }
+    .welcome-msg i    { font-size: 2.2rem; color: var(--accent); margin-bottom: 0.8rem; display: block; }
+    .welcome-msg h3   { color: #fff; margin-bottom: 0.4rem; font-size: 1rem; }
+    .welcome-msg p    { font-size: 0.82rem; max-width: 340px; margin: 0 auto; }
+
+    /* Messages */
+    .msg {
+      display: flex;
+      gap: 0.7rem;
+      margin-bottom: 1.1rem;
+      animation: fadeUp 0.25s ease;
+    }
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(6px); }
+      to   { opacity:1; transform:translateY(0);   }
+    }
+
+    .msg-avatar {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .msg-avatar.user  { background: var(--accent); color: #fff; }
+    .msg-avatar.agent { background: var(--surface-2); border: 1px solid var(--border); color: var(--accent); }
+
+    .msg-bubble {
+      flex: 1;
+      padding: 0.7rem 0.95rem;
+      border-radius: 10px;
+      font-size: 0.86rem;
+      line-height: 1.65;
+    }
+    .msg-bubble.user  { background: var(--user-bg);  border: 1px solid rgba(94,129,244,0.2); }
+    .msg-bubble.agent { background: var(--agent-bg); border: 1px solid var(--border); }
+
+    .msg-bubble h1,.msg-bubble h2,.msg-bubble h3 {
+      font-size: 0.92rem; margin: 0.65rem 0 0.35rem; color: #fff;
+    }
+    .msg-bubble h1:first-child,
+    .msg-bubble h2:first-child,
+    .msg-bubble h3:first-child { margin-top: 0; }
+    .msg-bubble p    { margin: 0 0 0.5rem; }
+    .msg-bubble p:last-child { margin-bottom: 0; }
+    .msg-bubble ul   { margin: 0.35rem 0 0.5rem 1.1rem; }
+    .msg-bubble li   { margin-bottom: 0.2rem; }
+    .msg-bubble strong { color: #fff; }
+    .msg-bubble code {
+      background: rgba(255,255,255,0.08);
+      border-radius: 4px;
+      padding: 0.1em 0.3em;
+      font-size: 0.8em;
+      color: var(--accent);
+    }
+    .msg-bubble a    { color: var(--accent); }
+    .msg-bubble hr   { border: none; border-top: 1px solid var(--border); margin: 0.6rem 0; }
+
+    /* Typing */
+    .typing-indicator { display:flex; align-items:center; gap:4px; padding:0.4rem 0; }
+    .typing-indicator span {
+      width:7px; height:7px;
+      background: var(--accent); border-radius:50%;
+      animation: bounce 1.2s infinite;
+    }
+    .typing-indicator span:nth-child(2) { animation-delay:0.2s; }
+    .typing-indicator span:nth-child(3) { animation-delay:0.4s; }
+    @keyframes bounce {
+      0%,60%,100% { transform:translateY(0); opacity:0.5; }
+      30%         { transform:translateY(-6px); opacity:1; }
+    }
+
+    /* Input */
+    .chat-input-row { display:flex; gap:0.7rem; }
+
+    .chat-input {
+      flex: 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.7rem 1rem;
+      color: #fff;
+      font-size: 0.88rem;
+      font-family: inherit;
+      resize: none;
+      outline: none;
+      min-height: 46px;
+      max-height: 120px;
+      transition: border-color 0.2s;
+    }
+    .chat-input:focus       { border-color: var(--accent); }
+    .chat-input::placeholder { color: var(--text-dim); }
+
+    .send-btn {
+      background: var(--accent);
+      border: none; border-radius: 8px;
+      width: 46px; height: 46px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 0.95rem;
+      transition: opacity 0.2s, transform 0.15s;
+      flex-shrink: 0; align-self: flex-end;
+    }
+    .send-btn:hover    { opacity: 0.82; }
+    .send-btn:active   { transform: scale(0.94); }
+    .send-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+    /* Suggestions */
+    .suggestions-label {
+      font-size: 0.67rem; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--text-dim);
+      margin-bottom: 0.55rem;
+    }
+    .suggestions { display:flex; flex-wrap:wrap; gap:0.45rem; }
+    .chip {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 0.32rem 0.8rem;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .chip:hover { background: var(--accent-glow); border-color: var(--accent); color: #fff; }
+  </style>
+</head>
+
+<body class="is-preload">
+
+<!-- Header -->
+<header id="header">
+  <a href="index.html" class="title">Gabriel Diaz</a>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="agent.html" class="active">Portfolio Agent</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- Wrapper -->
+<div id="wrapper">
+<section id="main" class="wrapper">
+  <div class="inner">
+
+    <h1 class="major">Portfolio AI Agent</h1>
+    <p>Ask anything about my 10 live data science projects — performance metrics,
+    methodology, data sources, trade-offs, or what to build next.
+    The agent reads live data directly from a central Supabase database.</p>
+
+    <!-- Stats -->
+    <div class="stats-bar">
+      <div class="stat-item"><span class="stat-value">10</span><span class="stat-label">Live Projects</span></div>
+      <div class="stat-item"><span class="stat-value">0.98</span><span class="stat-label">Best ROC-AUC</span></div>
+      <div class="stat-item"><span class="stat-value">6</span><span class="stat-label">ML Domains</span></div>
+      <div class="stat-item"><span class="stat-value">Live</span><span class="stat-label">Supabase DB</span></div>
+    </div>
+
+    <div class="agent-grid">
+
+      <!-- Sidebar -->
+      <div>
+        <div class="sidebar-label">Projects — click to ask</div>
+        <div id="project-list">
+          <p style="color:var(--text-dim);font-size:0.8rem">Loading...</p>
+        </div>
+      </div>
+
+      <!-- Chat -->
+      <div class="chat-wrapper">
+
+        <div class="chat-box" id="chat-box">
+          <div class="welcome-msg" id="welcome-msg">
+            <i class="fas fa-robot"></i>
+            <h3>Portfolio Agent</h3>
+            <p>Ask me anything about Gabriel's 10 data science projects.
+               I have live metrics from the Supabase database.</p>
+          </div>
+        </div>
+
+        <div>
+          <div class="suggestions-label">Try asking</div>
+          <div class="suggestions">
+            <span class="chip" onclick="ask(this.textContent)">Which project has the best model?</span>
+            <span class="chip" onclick="ask(this.textContent)">Compare the computer vision projects</span>
+            <span class="chip" onclick="ask(this.textContent)">What live APIs are used?</span>
+            <span class="chip" onclick="ask(this.textContent)">Best project for a healthcare recruiter?</span>
+            <span class="chip" onclick="ask(this.textContent)">How does fraud detection handle imbalance?</span>
+            <span class="chip" onclick="ask(this.textContent)">Suggest improvements for Port of LA</span>
+            <span class="chip" onclick="ask(this.textContent)">Explain the EV battery LSTM</span>
+            <span class="chip" onclick="ask(this.textContent)">Which projects auto-refresh?</span>
+          </div>
+        </div>
+
+        <div class="chat-input-row">
+          <textarea
+            class="chat-input" id="chat-input"
+            placeholder="Ask about any project..."
+            rows="1"
+            onkeydown="handleKey(event)"
+          ></textarea>
+          <button class="send-btn" id="send-btn" onclick="sendMessage()">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+</div>
+
+<!-- Footer -->
+<footer id="footer" class="wrapper alt">
+  <div class="inner">
+    <ul class="menu">
+      <li>&copy; Gabriel Diaz. All rights reserved.</li>
+      <li>Powered by <a href="https://anthropic.com">Claude</a> + <a href="https://supabase.com">Supabase</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrollex.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+
+<script>
+  // ── Replace these two values ──────────────────────────────────────────
+  const SUPABASE_URL  = "https://ywydhxnkndcirudnrkzw.supabase.co";   // e.g. https://xxxx.supabase.co
+  const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl3eWRoeG5rbmRjaXJ1ZG5ya3p3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkzMzA2ODksImV4cCI6MjA5NDkwNjY4OX0.cUGiKB4XxOllhJdQPcOkueccWc9DKBtchTl_XwiJ-10";
+  const AGENT_URL     = `${SUPABASE_URL}/functions/v1/agent`;
+
+  let history = [];
+  let busy    = false;
+
+  // ── Load projects ─────────────────────────────────────────────────────
+  async function loadProjects() {
+    try {
+      const res = await fetch(
+        `${SUPABASE_URL}/rest/v1/projects?select=name,category,live_url,github_url&order=category`,
+        { headers: { "apikey": SUPABASE_ANON, "Authorization": `Bearer ${SUPABASE_ANON}` } }
+      );
+      const projects = await res.json();
+      document.getElementById("project-list").innerHTML = projects.map(p => `
+        <div class="project-card" onclick="ask('Tell me about the ${p.name} project')">
+          <div class="project-card-name">${p.name}</div>
+          <div class="project-card-cat">${p.category}</div>
+          <div class="project-card-links">
+            <a href="${p.live_url}"   target="_blank" onclick="event.stopPropagation()"><i class="fas fa-external-link-alt"></i> Live</a>
+            <a href="${p.github_url}" target="_blank" onclick="event.stopPropagation()"><i class="fab fa-github"></i> Code</a>
+          </div>
+        </div>
+      `).join("");
+    } catch(e) {
+      document.getElementById("project-list").innerHTML =
+        '<p style="color:var(--text-dim);font-size:0.8rem">Could not load projects.</p>';
+    }
+  }
+
+  // ── Send ──────────────────────────────────────────────────────────────
+  function ask(text) {
+    document.getElementById("chat-input").value = text;
+    sendMessage();
+  }
+
+  function handleKey(e) {
+    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+  }
+
+  async function sendMessage() {
+    if (busy) return;
+    const input   = document.getElementById("chat-input");
+    const message = input.value.trim();
+    if (!message) return;
+
+    const welcome = document.getElementById("welcome-msg");
+    if (welcome) welcome.remove();
+
+    input.value = "";
+    input.style.height = "auto";
+    busy = true;
+    document.getElementById("send-btn").disabled = true;
+
+    appendMsg("user", message);
+    history.push({ role: "user", content: message });
+
+    const typingId = appendTyping();
+
+    try {
+      const res  = await fetch(AGENT_URL, {
+        method:  "POST",
+        headers: {
+          "Content-Type":  "application/json",
+          "apikey":        SUPABASE_ANON,
+          "Authorization": `Bearer ${SUPABASE_ANON}`,
+        },
+        body: JSON.stringify({ message, history: history.slice(-8) })
+      });
+      const data  = await res.json();
+      const reply = data.reply || data.error || "Something went wrong.";
+      removeEl(typingId);
+      appendMsg("agent", reply);
+      history.push({ role: "assistant", content: reply });
+    } catch(err) {
+      removeEl(typingId);
+      appendMsg("agent", "Could not reach the agent. Please try again.");
+    }
+
+    busy = false;
+    document.getElementById("send-btn").disabled = false;
+  }
+
+  // ── Rendering ─────────────────────────────────────────────────────────
+  function appendMsg(role, text) {
+    const box = document.getElementById("chat-box");
+    const div = document.createElement("div");
+    div.className = "msg";
+    const icon = role === "user"
+      ? `<div class="msg-avatar user"><i class="fas fa-user"></i></div>`
+      : `<div class="msg-avatar agent"><i class="fas fa-robot"></i></div>`;
+    const html = role === "agent" ? mdToHtml(text) : esc(text);
+    div.innerHTML = `${icon}<div class="msg-bubble ${role}">${html}</div>`;
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
+  }
+
+  function appendTyping() {
+    const box = document.getElementById("chat-box");
+    const div = document.createElement("div");
+    const id  = "t" + Date.now();
+    div.className = "msg"; div.id = id;
+    div.innerHTML = `
+      <div class="msg-avatar agent"><i class="fas fa-robot"></i></div>
+      <div class="msg-bubble agent">
+        <div class="typing-indicator"><span></span><span></span><span></span></div>
+      </div>`;
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
+    return id;
+  }
+
+  function removeEl(id) { const el = document.getElementById(id); if (el) el.remove(); }
+
+  function esc(t) {
+    return t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\n/g,"<br>");
+  }
+
+  function mdToHtml(t) {
+    return t
+      .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+      .replace(/^## (.+)$/gm,  '<h2>$1</h2>')
+      .replace(/^# (.+)$/gm,   '<h1>$1</h1>')
+      .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+      .replace(/`([^`]+)`/g,    '<code>$1</code>')
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank">$1</a>')
+      .replace(/^---$/gm,       '<hr>')
+      .replace(/^[-*] (.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>[\s\S]*?<\/li>)/g,'<ul>$1</ul>')
+      .replace(/\n\n/g,'</p><p>')
+      .replace(/\n/g,'<br>')
+      .replace(/^(.)/,'<p>$1')
+      + '</p>';
+  }
+
+  // ── Auto-resize textarea ──────────────────────────────────────────────
+  document.getElementById("chat-input").addEventListener("input", function() {
+    this.style.height = "auto";
+    this.style.height = Math.min(this.scrollHeight, 120) + "px";
+  });
+
+  loadProjects();
+</script>
+
+</body>
+</html>
